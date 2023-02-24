@@ -91,7 +91,9 @@ function Homepage() {
                           <div className="pricing">
                             <p className="price">
                               <span className="mr-2 price-dc">$120.00</span>
-                              <span className="price-sale">$80.00</span>
+                              <span className="price-sale">
+                                ${product.price}
+                              </span>
                             </p>
                           </div>
                           <div className="rating">

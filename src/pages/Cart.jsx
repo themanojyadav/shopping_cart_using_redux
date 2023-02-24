@@ -12,10 +12,19 @@ function Cart() {
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     cartProducts.map((product) => {
-      totalPrice += parseInt(product.price + product.quantity);
+      totalPrice += parseInt(product.price * product.quantity);
       return;
     });
     return totalPrice;
+  };
+
+  const handleRemoveCartItem = (product) => {
+    console.log(product);
+    dispatch(allActions.cartAction.removeCartItem(product));
+  };
+
+  const handleEmptyCart = () => {
+    dispatch(allActions.cartAction.emptyCart());
   };
 
   return (
@@ -65,9 +74,12 @@ function Cart() {
                           return (
                             <tr className="text-center" key={index + 1}>
                               <td className="product-remove">
-                                <a href="/">
+                                <button
+                                  type="button"
+                                  onClick={() => handleRemoveCartItem(product)}
+                                >
                                   <BiTrash />
-                                </a>
+                                </button>
                               </td>
 
                               <td className="image-prod" width="100">
@@ -94,6 +106,15 @@ function Cart() {
                         })}
                       </tbody>
                     </table>
+                  </div>
+                  <div className="mt-4 text-right">
+                    <button
+                      className="btn btn-dark"
+                      onClick={handleEmptyCart}
+                      type="button"
+                    >
+                      Empty Cart
+                    </button>
                   </div>
                 </div>
               </div>

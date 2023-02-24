@@ -22,6 +22,19 @@ const cartReducer = (inititalState = [], action) => {
     ];
   }
 
+  if (action.type === "REMOVE_CART_ITEM") {
+    let product = action.payload.product;
+    console.log(product);
+    let newState = inititalState.filter((item) => {
+      return item.id !== product.id;
+    });
+    return newState;
+  }
+
+  if (action.type === "EMPTY_CART") {
+    return [];
+  }
+
   return inititalState;
 };
 
