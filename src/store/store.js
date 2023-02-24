@@ -1,0 +1,34 @@
+import { combineReducers, createStore } from "redux";
+
+const cartReducer = (inititalState = [], action) => {
+  if (action.type === "ADD_TO_CART") {
+    let product = action.payload.product;
+    let item = inititalState.find((item) => item.id === product.id);
+
+    if (item) {
+      item.quantity = item.quantity + 1;
+      return inititalState;
+    }
+
+    return [
+      ...inititalState,
+      {
+        id: product.id,
+        image: product.image,
+        name: product.title,
+        quantity: 1,
+        price: product.price,
+      },
+    ];
+  }
+
+  return inititalState;
+};
+
+const rootReducer = combineReducers({ cartReducer });
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+export default store;
